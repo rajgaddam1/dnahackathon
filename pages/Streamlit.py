@@ -274,8 +274,7 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     #st.download_button(label = "Download data as CSV",data = database_csv,file_name = 'Database_info.csv',mime = 'text/csv',)
     schemas_df = get_schema(snowflake_connector, sel_data)
 
-    with st.sidebar:
-        sel_schema = st.radio("Schemas Available",schemas_df.name)
+    sel_schema = st.radio("Schemas Available",schemas_df.name)
     
     st.subheader('Create a new Schema')
     if st.button('Create a new Schema', on_click = callback) or st.session_state.key:
