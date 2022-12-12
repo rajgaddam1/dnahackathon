@@ -114,7 +114,7 @@ def create_data(con):
     
 ################SIDEBAR_1(WAREHOUSE)
 with st.sidebar:
-    sel_ware = st.radio("Warehouse",list_ware_up)
+    sel_ware = st.selectbox("Warehouse",list_ware_up)
 
     
 
@@ -160,7 +160,7 @@ list_data_up = list_up + list_data
 #############SIDEBAR_2(DATABASES)
 with st.sidebar:
     global sel_data
-    sel_data = st.radio("Databases", list_data_up)
+    sel_data = st.selectbox("Databases", list_data_up)
     
 if sel_data != 'Select below available Databases':
     if st.button('Create a Database', on_click = callback) or st.session_state.key:
