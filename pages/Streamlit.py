@@ -6,6 +6,7 @@ warnings.filterwarnings("ignore")
 import pandas as pd
 from snowflake.connector.connection import SnowflakeConnection
 from PIL import Image
+import time
 
 
 ##To manage bug in sreamlit(Intialize button click)
@@ -167,15 +168,16 @@ if sel_data != 'Select below available Databases':
 
 ###Homepage######
 
-if sel_data == 'Select below available Databases' and sel_ware == 'Select below available wareshouse':
-    st.title("Snowflake Hackathon")
+with st.sidebar:
     image = Image.open('Infosys_logo.JPG')
-    st.write('This Application is created to To connect to snowflake database from streamlit UI It is used to Create Warehouse/Database/Schema/Table in Snowflake')
+    with st.echo():
+        st.write("Snowflake Hackathon ❄️")
+        st.image(image, caption='Snowflake Hackathon')
 
-    st.image(image, caption='Snowflake Hackathon')
+    with st.spinner("Loading..."):
+        time.sleep(5)
+    st.success("Done!")
     
-    
-
 
     
 #############SIDEBAR_3(Schemas)  
