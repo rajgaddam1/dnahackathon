@@ -16,7 +16,6 @@ with st.sidebar:
     st.image(image, caption='Snowflake Hackathon')
     st.success("You are successfully logged in")
 
-def refresh():
     with st.spinner("Loading..."):
         time.sleep(1)
 
@@ -116,14 +115,14 @@ def create_data(con):
 ################SIDEBAR_1(WAREHOUSE)
 with st.sidebar:
     sel_ware = st.radio("Warehouse",list_ware_up)
-    refresh()
+
     
 
 if sel_ware != 'Select below available wareshouse':
     if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         
         create_ware(con)
-        #refresh()
+
         #pass
     st.subheader('Warehouse Information')
 
