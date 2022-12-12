@@ -136,7 +136,7 @@ with st.sidebar:
 
 ###Action after selecting Database
 if sel_ware != 'Create or Drop Warehouse':
-    st.subheader('Do you want to Drop'+ str(sel_ware) +' Warehouse? 🗑️')
+    st.subheader('👇 Do you want to Drop '+ str(sel_ware) +' Warehouse? 🗑️')
     if st.button('Drop warehouse', on_click = callback) or st.session_state.key:
         
         drop_ware(con, sel_ware)
@@ -145,7 +145,7 @@ if sel_ware != 'Create or Drop Warehouse':
     st.subheader('Warehouse Information')
 
     st.dataframe(wareshouse[['name', 'size']].loc[wareshouse['name'] == sel_ware])
-    
+"""    
     st.markdown("Click on below button to Download full Information about Warehouse")
     st.download_button(
     label = "Download data as CSV",
@@ -153,7 +153,7 @@ if sel_ware != 'Create or Drop Warehouse':
     file_name = 'Warehouse_info.csv',
     mime = 'text/csv',
 )
-
+"""
 #### Homepage Create Warehouse
 if sel_ware == 'Create or Drop Warehouse':
     st.title('Snowflake Hackathon ❄️')
@@ -161,6 +161,13 @@ if sel_ware == 'Create or Drop Warehouse':
     
     if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         create_ware(con)
+    st.markdown("👇 Click on below button to Download full Information about Warehouses available")
+    st.download_button(
+    label = "Download data as CSV",
+    data = ware_csv,
+    file_name = 'Warehouse_info.csv',
+    mime = 'text/csv',
+)
     
 
 
