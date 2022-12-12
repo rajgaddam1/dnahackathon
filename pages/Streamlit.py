@@ -188,14 +188,14 @@ databases_up.type.fillna("PERMANENT",inplace = True)
 
 
 list_data = databases['name'].to_list()
-list_up = ['-------------------', 'Create Database']
+list_up = ['-------------------', 'Create a Database']
 list_data_up = list_up + list_data
 #############SIDEBAR_2(DATABASES)
 with st.sidebar:
     global sel_data
     sel_data = st.selectbox("Databases", list_data_up)
     
-if sel_data != 'Create or Drop Database' and sel_data !=  '-------------------':
+if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     if st.button('Create a Database', on_click = callback) or st.session_state.key:
         
         create_data(con)
@@ -219,7 +219,7 @@ def get_schema(_connector, dbname) -> pd.DataFrame:
     sql_cmd2 = 'SHOW SCHEMAS IN DATABASE ' + str(dbname) + ';'
     return pd.read_sql(sql_cmd2, _connector)
  
-if sel_data != 'Select below available Databases':
+if sel_data != 'Create a Database':
     global sel_schema
     schemas_df = get_schema(snowflake_connector, sel_data)
     sc_list_data = schemas_df['name'].to_list()
