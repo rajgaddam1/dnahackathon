@@ -61,7 +61,7 @@ def get_wareshouse(_connector) -> pd.DataFrame:
 wareshouse = get_wareshouse(snowflake_connector)
 
 list_ware = wareshouse['name'].to_list()
-list_up = ['Create or Drop Warehouse']
+list_up = ['-------------------', 'Create a Warehouse']
 list_ware_up = list_up + list_ware
 
 ##Snowflake Waarehouse dataframe to csv
@@ -134,8 +134,8 @@ def create_data(con):
 with st.sidebar:
     sel_ware = st.selectbox("Warehouse",list_ware_up)
 
-###Action after selecting Database
-if sel_ware != 'Create or Drop Warehouse':
+###Action after selecting Warehouse
+if sel_ware != 'Create a Warehouse' and sel_ware !=  '-------------------':
     st.subheader('👇 Do you want to Drop '+ str(sel_ware) +' Warehouse? 🗑️')
     if st.button('Drop warehouse', on_click = callback) or st.session_state.key:
         
@@ -154,7 +154,7 @@ if sel_ware != 'Create or Drop Warehouse':
     #mime = 'text/csv',)
 
 #### Homepage Create Warehouse
-if sel_ware == 'Create or Drop Warehouse':
+if sel_ware == 'Create a Warehouse':
     st.title('Snowflake Hackathon ❄️')
     st.subheader("👇 Let's Create a new Warehouse in Snowflake")
     
@@ -188,14 +188,14 @@ databases_up.type.fillna("PERMANENT",inplace = True)
 
 
 list_data = databases['name'].to_list()
-list_up = ['Select below available Databases']
+list_up = ['-------------------', 'Create Database']
 list_data_up = list_up + list_data
 #############SIDEBAR_2(DATABASES)
 with st.sidebar:
     global sel_data
     sel_data = st.selectbox("Databases", list_data_up)
     
-if sel_data != 'Select below available Databases':
+if sel_data != 'Create or Drop Database' and sel_data !=  '-------------------':
     if st.button('Create a Database', on_click = callback) or st.session_state.key:
         
         create_data(con)
