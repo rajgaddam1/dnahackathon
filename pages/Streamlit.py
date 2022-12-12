@@ -88,8 +88,8 @@ def create_ware(con):
         con.close()
         
 #Function to Drop Warehouse
-def drop_ware(con):
-    ware_name_del = st.radio("Select Warehouse to Drop",list_ware)
+def drop_ware(con, ware_name_del):
+    #ware_name_del = st.radio("Select Warehouse to Drop",list_ware)
     sql_cmd = 'DROP WAREHOUSE IF EXISTS ' + str(ware_name_del) + ';'
     if st.button('Drop Warehouse'):
         try:
@@ -136,9 +136,10 @@ with st.sidebar:
 
 ###Action after selecting Database
 if sel_ware != 'Create or Drop Warehouse':
-    if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
+    st.subheader('Do you want to Drop'+ str(sel_ware) +' Warehouse? 🗑️')
+    if st.button('Drop warehouse', on_click = callback) or st.session_state.key:
         
-        create_ware(con)
+        drop_ware(con, sel_ware)
 
         #pass
     st.subheader('Warehouse Information')
@@ -161,9 +162,6 @@ if sel_ware == 'Create or Drop Warehouse':
     if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         create_ware(con)
     
-    st.subheader("Do you want to Drop a Warehouse? 🗑️")
-    if st.button('Drop warehouse', on_click = callback) or st.session_state.key:
-        drop_ware(con)
 
 
 ####ShowDatabases
