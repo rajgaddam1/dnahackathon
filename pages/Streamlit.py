@@ -162,7 +162,7 @@ if sel_ware == 'Create or Drop Warehouse':
         create_ware(con)
     
     st.subheader("Do you want to Drop a Warehouse? 🗑️")
-    if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
+    if st.button('Drop warehouse', on_click = callback) or st.session_state.key:
         drop_ware(con)
 
 
