@@ -129,6 +129,23 @@ def create_data(con):
             cur.close()
         con.close()
         
+#################Function to DROP Databsase       
+def data_database(con, database_name_del):
+    #ware_name_del = st.radio("Select Warehouse to Drop",list_ware)
+    sql_cmd = 'DROP DATABASE IF EXISTS ' + str(database_name_del) + ';'
+
+    try:
+        cur = con.cursor()
+        cur.execute(sql_cmd)
+        st.success('Database has been Dropped')
+    except Exception as e:
+        print(e)
+        st.exception(e)
+        st.write('An error has occured please check logs')
+    finally:
+        cur.close()
+    con.close()
+        
     
 ################ SIDEBAR_1(WAREHOUSE)###########################
 with st.sidebar:
@@ -196,9 +213,10 @@ with st.sidebar:
     sel_data = st.selectbox("Databases", list_data_up)
     
 if sel_data != 'Create a Database' and sel_data !=  '-------------------':
-    if st.button('Create a Database', on_click = callback) or st.session_state.key:
+    st.subheader('👇 Do you want to Drop '+ str(sel_data) +' Database? 🗑️')
+    if st.button('Drop Databse'):
         
-        create_data(con)
+        data_database(con, sel_data)
         #pass
     st.subheader('Database Information')
 
