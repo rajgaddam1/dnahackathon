@@ -86,6 +86,27 @@ def create_ware(con):
         finally:
             cur.close()
         con.close()
+        
+#Function to Drop Warehouse
+def drop_ware(con):
+    ware_name_del = st.radio("Select Warehouse to Drop",list_ware)
+    sql_cmd = 'DROP WAREHOUSE IF EXISTS' + str(ware_name_del) + ';'
+    if st.button('Drop Warehouse'):
+        try:
+            cur = con.cursor()
+            cur.execute(sql_cmd)
+            st.success('Warehouse has been Dropped')
+        except Exception as e:
+            print(e)
+            st.exception(e)
+            st.write('An error has occured please check logs')
+        finally:
+            cur.close()
+        con.close()
+
+
+
+
 #################Function to create Databsase
 def create_data(con):
     database_name = st.text_input('Enter Database Name')
@@ -140,8 +161,9 @@ if sel_ware == 'Create or Drop Warehouse':
     if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         create_ware(con)
     
-
-
+    st.subheader("Do you want to Drop a Warehouse? 🗑️")
+    if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
+        drop_ware(con)
 
 
 ####ShowDatabases
