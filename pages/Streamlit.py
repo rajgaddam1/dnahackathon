@@ -17,7 +17,7 @@ with st.sidebar:
 
     with st.spinner("Loading..."):
         time.sleep(5)
-    st.success("Done!")
+    st.success("You are successfully logged in")
 
 #############
 ##To manage bug in sreamlit(Intialize button click)
