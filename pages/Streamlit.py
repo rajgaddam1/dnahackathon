@@ -219,7 +219,7 @@ def get_schema(_connector, dbname) -> pd.DataFrame:
     sql_cmd2 = 'SHOW SCHEMAS IN DATABASE ' + str(dbname) + ';'
     return pd.read_sql(sql_cmd2, _connector)
  
-if sel_data != 'Create a Database':
+if sel_data != 'Create a Database' and sel_data != '-------------------'  :
     global sel_schema
     schemas_df = get_schema(snowflake_connector, sel_data)
     sc_list_data = schemas_df['name'].to_list()
