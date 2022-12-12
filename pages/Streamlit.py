@@ -137,7 +137,7 @@ if sel_ware == 'Create or Drop Warehouse':
     st.title('Snowflake Hackathon ❄️')
     st.subheader("Let's Create a Warehouse in Snowflake 👇")
     
-    if st.button('     Create a new warehouse     ', on_click = callback) or st.session_state.key:
+    if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         create_ware(con)
     
 
