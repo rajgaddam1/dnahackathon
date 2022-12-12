@@ -13,7 +13,7 @@ from PIL import Image
 with st.sidebar:
     image = Image.open('Infosys_logo.JPG')
     st.write("Snowflake Hackathon ❄️")
-    st.image(image, caption='Snowflake Hackathon')
+    st.image(image)
     st.success("You are successfully logged in")
 
 #############
@@ -134,6 +134,8 @@ if sel_ware != 'Create or Drop Warehouse':
 
 #### Homepage Create Warehouse
 if sel_ware == 'Create or Drop Warehouse':
+    st.title('Snowflake Hackathon ❄️"')
+    st.subheader('Warehouse Information')
     
     if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         create_ware(con)
