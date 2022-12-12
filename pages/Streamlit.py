@@ -6,7 +6,7 @@ warnings.filterwarnings("ignore")
 import pandas as pd
 from snowflake.connector.connection import SnowflakeConnection
 from PIL import Image
-import time
+
 
 
 ##########Sidebar Logo
@@ -15,9 +15,6 @@ with st.sidebar:
     st.write("Snowflake Hackathon ❄️")
     st.image(image, caption='Snowflake Hackathon')
     st.success("You are successfully logged in")
-
-    with st.spinner("Loading..."):
-        time.sleep(1)
 
 #############
 ##To manage bug in sreamlit(Intialize button click)
@@ -112,12 +109,11 @@ def create_data(con):
         con.close()
         
     
-################SIDEBAR_1(WAREHOUSE)
+################ SIDEBAR_1(WAREHOUSE)###########################
 with st.sidebar:
     sel_ware = st.selectbox("Warehouse",list_ware_up)
 
-    
-
+###Action after selecting Database
 if sel_ware != 'Create or Drop Warehouse':
     if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         
@@ -135,6 +131,15 @@ if sel_ware != 'Create or Drop Warehouse':
     file_name = 'Warehouse_info.csv',
     mime = 'text/csv',
 )
+
+#### Homepage Create Warehouse
+if sel_ware == 'Create or Drop Warehouse':
+    
+    if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
+        create_ware(con)
+    
+
+
 
 
 ####ShowDatabases
