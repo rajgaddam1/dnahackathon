@@ -90,7 +90,7 @@ def create_ware(con):
 #Function to Drop Warehouse
 def drop_ware(con):
     ware_name_del = st.radio("Select Warehouse to Drop",list_ware)
-    sql_cmd = 'DROP WAREHOUSE IF EXISTS' + str(ware_name_del) + ';'
+    sql_cmd = 'DROP WAREHOUSE IF EXISTS ' + str(ware_name_del) + ';'
     if st.button('Drop Warehouse'):
         try:
             cur = con.cursor()
