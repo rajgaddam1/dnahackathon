@@ -168,7 +168,7 @@ if sel_data != 'Select below available Databases':
 ###Homepage######
 
 if sel_data == 'Select below available Databases' and sel_ware == 'Select below available wareshouse':
-    st.title("Snowflake Hackathon")
+    st.subheader("Snowflake Hackathon")
     image = Image.open('Infosys_logo.JPG')
     st.write('This Application is created to To connect to snowflake database from streamlit UI It is used to Create Warehouse/Database/Schema/Table in Snowflake')
 
