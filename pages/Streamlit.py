@@ -12,9 +12,8 @@ import time
 ##########Sidebar Logo
 with st.sidebar:
     image = Image.open('Infosys_logo.JPG')
-    with st.echo():
-        st.write("Snowflake Hackathon ❄️")
-        st.image(image, caption='Snowflake Hackathon')
+    st.write("Snowflake Hackathon ❄️")
+    st.image(image, caption='Snowflake Hackathon')
 
     with st.spinner("Loading..."):
         time.sleep(5)
