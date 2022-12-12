@@ -14,10 +14,11 @@ with st.sidebar:
     image = Image.open('Infosys_logo.JPG')
     st.write("Snowflake Hackathon ❄️")
     st.image(image, caption='Snowflake Hackathon')
-
-    with st.spinner("Loading..."):
-        time.sleep(5)
     st.success("You are successfully logged in")
+
+def refresh():
+    with st.spinner("Loading..."):
+        time.sleep(1)
 
 #############
 ##To manage bug in sreamlit(Intialize button click)
@@ -123,6 +124,7 @@ if sel_ware != 'Select below available wareshouse':
     if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         
         create_ware(con)
+        refresh()
         #pass
     st.subheader('Warehouse Information')
 
@@ -166,6 +168,7 @@ if sel_data != 'Select below available Databases':
     if st.button('Create a Database', on_click = callback) or st.session_state.key:
         
         create_data(con)
+        refresh()
         #pass
     st.subheader('Database Information')
 
