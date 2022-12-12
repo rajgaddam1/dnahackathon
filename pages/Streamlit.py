@@ -81,9 +81,10 @@ def create_ware(con):
         try:
             cur = con.cursor()
             cur.execute(sql_cmd)
-            st.write('Warehouse has been created')
+            st.success('Warehouse has been created')
         except Exception as e:
             print(e)
+            st.exception(e)
             st.write('An error has occured please check logs')
         finally:
             cur.close()
@@ -101,9 +102,10 @@ def create_data(con):
         try:
             cur = con.cursor()
             cur.execute(sql_cmd)
-            st.write('Database has been created')
+            st.success('Database has been created')
         except Exception as e:
             print(e)
+            st.exception(e)
             st.write('An error has occured please check logs')
         finally:
             cur.close()
