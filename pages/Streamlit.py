@@ -145,15 +145,14 @@ if sel_ware != 'Create or Drop Warehouse':
     st.subheader('Warehouse Information')
 
     st.dataframe(wareshouse[['name', 'size']].loc[wareshouse['name'] == sel_ware])
-"""    
-    st.markdown("Click on below button to Download full Information about Warehouse")
-    st.download_button(
-    label = "Download data as CSV",
-    data = ware_csv,
-    file_name = 'Warehouse_info.csv',
-    mime = 'text/csv',
-)
-"""
+   
+    #st.markdown("Click on below button to Download full Information about Warehouse")
+    #st.download_button(
+    #label = "Download data as CSV",
+    #data = ware_csv,
+    #file_name = 'Warehouse_info.csv',
+    #mime = 'text/csv',)
+
 #### Homepage Create Warehouse
 if sel_ware == 'Create or Drop Warehouse':
     st.title('Snowflake Hackathon ❄️')
