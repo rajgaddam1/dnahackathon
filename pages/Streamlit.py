@@ -129,6 +129,30 @@ def create_data(con):
             cur.close()
         con.close()
         
+#####Function to create Schema
+def create_schema(con, dbname):
+    schema_name = st.text_input('Enter Schema Name')
+    schema_type = st.radio('Select Schema Type', ['PERMANENT', 'TRANSIENT'])
+    if schema_type == 'PERMANENT':
+        sql_cmd3 = 'CREATE OR REPLACE SCHEMA ' + str(dbname) + '.'  +str(schema_name) + ';'
+    else:
+        sql_cmd3 = 'CREATE OR REPLACE TRANSIENT SCHEMA '+ str(dbname) + '.'  +str(schema_name) + ';'
+        
+    if st.button('Create Schema'):
+        try:
+            cur = con.cursor()
+            cur.execute(sql_cmd3)
+            st.success('Schema has been created')
+        except Exception as e:
+            print(e)
+            st.exception(e)
+            st.write('An error has occured please check logs')
+        finally:
+            cur.close()
+        con.close()
+    
+
+        
 #################Function to DROP Databsase       
 def data_database(con, database_name_del):
     #ware_name_del = st.radio("Select Warehouse to Drop",list_ware)
@@ -207,6 +231,14 @@ databases_up.type.fillna("PERMANENT",inplace = True)
 list_data = databases['name'].to_list()
 list_up = ['-------------------', 'Create a Database']
 list_data_up = list_up + list_data
+
+####SHOW SCHEMAS
+def get_schema(_connector, dbname) -> pd.DataFrame:
+    sql_cmd2 = 'SHOW SCHEMAS IN DATABASE ' + str(dbname) + ';'
+    return pd.read_sql(sql_cmd2, _connector)
+
+
+
 #############SIDEBAR_2(DATABASES)
 with st.sidebar:
     global sel_data
@@ -240,19 +272,34 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     
     #st.markdown("Click on below button to Download full Information about Database")
     #st.download_button(label = "Download data as CSV",data = database_csv,file_name = 'Database_info.csv',mime = 'text/csv',)
-
-
-    
-#############SIDEBAR_3(Schemas)  
-def get_schema(_connector, dbname) -> pd.DataFrame:
-    sql_cmd2 = 'SHOW SCHEMAS IN DATABASE ' + str(dbname) + ';'
-    return pd.read_sql(sql_cmd2, _connector)
- 
-if sel_data != 'Create a Database' and sel_data != '-------------------'  :
-    global sel_schema
     schemas_df = get_schema(snowflake_connector, sel_data)
-    sc_list_data = schemas_df['name'].to_list()
-    sc_list_up = ['Select below available Schemas']
-    sc_list_data_up = sc_list_up + sc_list_data
+
     with st.sidebar:
-        sel_schema = st.radio("Schema",sc_list_data_up)
+        sel_schema = st.radio("Schemas Available",schemas_df.name)
+    
+    st.subheader('Create a new Schema')
+    if st.button('Create a new Schema', on_click = callback) or st.session_state.key:
+        create_schema(con, sel_data)
+    
+    
+
+
+
+
+
+
+   
+#############SIDEBAR_3(Schemas)
+  
+#def get_schema(_connector, dbname) -> pd.DataFrame:
+    #sql_cmd2 = 'SHOW SCHEMAS IN DATABASE ' + str(dbname) + ';'
+    #return pd.read_sql(sql_cmd2, _connector)
+ 
+#if sel_data != 'Create a Database' and sel_data != '-------------------'  :
+    #global sel_schema
+    #schemas_df = get_schema(snowflake_connector, sel_data)
+    #sc_list_data = schemas_df['name'].to_list()
+    #sc_list_up = ['Select below available Schemas']
+    #sc_list_data_up = sc_list_up + sc_list_data
+    #with st.sidebar:
+        #sel_schema = st.radio("Schema",sc_list_data_up)
