@@ -115,16 +115,15 @@ def create_data(con):
     
 ################SIDEBAR_1(WAREHOUSE)
 with st.sidebar:
-    sel_ware = st.radio(
-        "Warehouse",
-        list_ware_up
-    )
+    sel_ware = st.radio("Warehouse",list_ware_up)
+    refresh()
+    
 
 if sel_ware != 'Select below available wareshouse':
     if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         
         create_ware(con)
-        refresh()
+        #refresh()
         #pass
     st.subheader('Warehouse Information')
 
@@ -168,7 +167,6 @@ if sel_data != 'Select below available Databases':
     if st.button('Create a Database', on_click = callback) or st.session_state.key:
         
         create_data(con)
-        refresh()
         #pass
     st.subheader('Database Information')
 
