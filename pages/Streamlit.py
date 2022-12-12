@@ -91,18 +91,18 @@ def create_ware(con):
 def drop_ware(con, ware_name_del):
     #ware_name_del = st.radio("Select Warehouse to Drop",list_ware)
     sql_cmd = 'DROP WAREHOUSE IF EXISTS ' + str(ware_name_del) + ';'
-    if st.button('Drop Warehouse'):
-        try:
-            cur = con.cursor()
-            cur.execute(sql_cmd)
-            st.success('Warehouse has been Dropped')
-        except Exception as e:
-            print(e)
-            st.exception(e)
-            st.write('An error has occured please check logs')
-        finally:
-            cur.close()
-        con.close()
+
+    try:
+        cur = con.cursor()
+        cur.execute(sql_cmd)
+        st.success('Warehouse has been Dropped')
+    except Exception as e:
+        print(e)
+        st.exception(e)
+        st.write('An error has occured please check logs')
+    finally:
+        cur.close()
+    con.close()
 
 
 
@@ -156,7 +156,7 @@ if sel_ware != 'Create or Drop Warehouse':
 #### Homepage Create Warehouse
 if sel_ware == 'Create or Drop Warehouse':
     st.title('Snowflake Hackathon ❄️')
-    st.subheader("👇 Let's Create a Warehouse in Snowflake")
+    st.subheader("👇 Let's Create a new Warehouse in Snowflake")
     
     if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         create_ware(con)
