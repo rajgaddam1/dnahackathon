@@ -161,7 +161,7 @@ if sel_ware == 'Create or Drop Warehouse':
     
     if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         create_ware(con)
-    st.markdown("👇 Click on below button to Download full Information about Warehouses available")
+    st.subheader("👇 Click here to Download full Information about Warehouses available")
     st.download_button(
     label = "Download data as CSV",
     data = ware_csv,
