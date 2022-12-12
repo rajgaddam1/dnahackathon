@@ -154,7 +154,7 @@ with st.sidebar:
 ###Action after selecting Warehouse
 if sel_ware != 'Create a Warehouse' and sel_ware !=  '-------------------':
     st.subheader('👇 Do you want to Drop '+ str(sel_ware) +' Warehouse? 🗑️')
-    if st.button('Drop warehouse', on_click = callback) or st.session_state.key:
+    if st.button('Drop warehouse'):
         
         drop_ware(con, sel_ware)
 
@@ -212,6 +212,22 @@ with st.sidebar:
     global sel_data
     sel_data = st.selectbox("Databases", list_data_up)
     
+###Create Databse Page
+if sel_data == 'Create a Database':
+    st.subheader("👇 Let's Create a new Warehouse in Snowflake")
+    
+    if st.button('Create a new database', on_click = callback) or st.session_state.key:
+        create_data(con)
+    st.subheader("👇 Click here to Download full Information about Databases available")
+    st.download_button(
+    label = "Download data as CSV",
+    data = database_csv,
+    file_name = 'Database_info.csv',
+    mime = 'text/csv',
+)
+    
+
+###Action after selecting Database    
 if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     st.subheader('👇 Do you want to Drop '+ str(sel_data) +' Database? 🗑️')
     if st.button('Drop Databse'):
@@ -222,13 +238,8 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
 
     st.dataframe(databases_up[['name', 'type']].loc[databases_up['name'] == sel_data])
     
-    st.markdown("Click on below button to Download full Information about Database")
-    st.download_button(
-    label = "Download data as CSV",
-    data = database_csv,
-    file_name = 'Database_info.csv',
-    mime = 'text/csv',
-)
+    #st.markdown("Click on below button to Download full Information about Database")
+    #st.download_button(label = "Download data as CSV",data = database_csv,file_name = 'Database_info.csv',mime = 'text/csv',)
 
 
     
