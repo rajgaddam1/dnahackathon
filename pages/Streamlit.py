@@ -9,6 +9,18 @@ from PIL import Image
 import time
 
 
+##########Sidebar Logo
+with st.sidebar:
+    image = Image.open('Infosys_logo.JPG')
+    with st.echo():
+        st.write("Snowflake Hackathon ❄️")
+        st.image(image, caption='Snowflake Hackathon')
+
+    with st.spinner("Loading..."):
+        time.sleep(5)
+    st.success("Done!")
+
+#############
 ##To manage bug in sreamlit(Intialize button click)
 if 'key' not in st.session_state:
     st.session_state.key = False
@@ -166,18 +178,6 @@ if sel_data != 'Select below available Databases':
     mime = 'text/csv',
 )
 
-###Homepage######
-
-with st.sidebar:
-    image = Image.open('Infosys_logo.JPG')
-    with st.echo():
-        st.write("Snowflake Hackathon ❄️")
-        st.image(image, caption='Snowflake Hackathon')
-
-    with st.spinner("Loading..."):
-        time.sleep(5)
-    st.success("Done!")
-    
 
     
 #############SIDEBAR_3(Schemas)  
