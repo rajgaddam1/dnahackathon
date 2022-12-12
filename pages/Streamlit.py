@@ -168,7 +168,7 @@ if sel_data != 'Select below available Databases':
 ###Homepage######
 
 if sel_data == 'Select below available Databases' and sel_ware == 'Select below available wareshouse':
-    image = Image.open('Infosys_logo.jpg')
+    image = Image.open('Infosys_logo.JPG')
 
 st.image(image, caption='Snowflake Hackathon')
     
