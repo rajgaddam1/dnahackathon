@@ -64,7 +64,7 @@ def get_wareshouse(_connector) -> pd.DataFrame:
 wareshouse = get_wareshouse(snowflake_connector)
 
 list_ware = wareshouse['name'].to_list()
-list_up = ['Select below available wareshouse']
+list_up = ['Create or Drop Warehouse']
 list_ware_up = list_up + list_ware
 
 ##Snowflake Waarehouse dataframe to csv
@@ -118,7 +118,7 @@ with st.sidebar:
 
     
 
-if sel_ware != 'Select below available wareshouse':
+if sel_ware != 'Create or Drop Warehouse':
     if st.button('Create a new warehouse', on_click = callback) or st.session_state.key:
         
         create_ware(con)
