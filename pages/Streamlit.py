@@ -5,6 +5,7 @@ import warnings
 warnings.filterwarnings("ignore")
 import pandas as pd
 from snowflake.connector.connection import SnowflakeConnection
+from PIL import Image
 
 
 ##To manage bug in sreamlit(Intialize button click)
@@ -163,6 +164,17 @@ if sel_data != 'Select below available Databases':
     file_name = 'Database_info.csv',
     mime = 'text/csv',
 )
+
+###Homepage######
+
+if sel_data == 'Select below available Databases' and sel_ware == 'Select below available wareshouse':
+    image = Image.open('Infosys_logo.jpg')
+
+st.image(image, caption='Snowflake Hackathon')
+    
+    
+
+
     
 #############SIDEBAR_3(Schemas)  
 def get_schema(_connector, dbname) -> pd.DataFrame:
