@@ -128,7 +128,27 @@ def create_data(con):
         finally:
             cur.close()
         con.close()
+##############################
+def clone_data(con,sel_data):
+    #database_name1 = st.text_input('Enter Database Name')
+    source_name = st.text_input('Enter Source Database Name')
+    sql_cmd = 'CREATE OR REPLACE DATABASE ' + str(sel_data) + ' CLONE '+ str(source_name)  +';'
         
+    if st.button('Create Database'):
+        try:
+            cur = con.cursor()
+            cur.execute(sql_cmd)
+            st.success('Database has been Cloned')
+        except Exception as e:
+            print(e)
+            #st.exception(e)
+            st.write('An error has occured please check logs')
+        finally:
+            cur.close()
+        con.close()
+
+
+       
 #####Function to create Schema
 def create_schema(con, dbname):
     schema_name = st.text_input('Enter Schema Name')
@@ -191,7 +211,6 @@ def create_table(con):
             finally:
                 cur.close()
             con.close()
-         
 
 ################ SIDEBAR_1(WAREHOUSE)###########################
 with st.sidebar:
@@ -296,6 +315,10 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
         
         drop_database(con, sel_data)
         #pass
+    st.subheader('👇 Do you want to Clone Existing Database? 🗑️')
+    if st.button('Clone Databse'):
+        clone_data(con,sel_data)
+    
     st.subheader('Database Information')
 
     st.dataframe(databases_up[['name', 'type']].loc[databases_up['name'] == sel_data])
