@@ -98,7 +98,7 @@ def drop_ware(con, ware_name_del):
         st.success('Warehouse has been Dropped')
     except Exception as e:
         print(e)
-        st.exception(e)
+        #st.exception(e)
         st.write('An error has occured please check logs')
     finally:
         cur.close()
@@ -123,7 +123,7 @@ def create_data(con):
             st.success('Database has been created')
         except Exception as e:
             print(e)
-            st.exception(e)
+            #st.exception(e)
             st.write('An error has occured please check logs')
         finally:
             cur.close()
@@ -145,7 +145,7 @@ def create_schema(con, dbname):
             st.success('Schema has been created')
         except Exception as e:
             print(e)
-            st.exception(e)
+            #st.exception(e)
             st.write('An error has occured please check logs')
         finally:
             cur.close()
@@ -164,7 +164,7 @@ def data_database(con, database_name_del):
         st.success('Database has been Dropped')
     except Exception as e:
         print(e)
-        st.exception(e)
+        #st.exception(e)
         st.write('An error has occured please check logs')
     finally:
         cur.close()
@@ -237,6 +237,13 @@ def get_schema(_connector, dbname) -> pd.DataFrame:
     sql_cmd2 = 'SHOW SCHEMAS IN DATABASE ' + str(dbname) + ';'
     return pd.read_sql(sql_cmd2, _connector)
 
+####SHOW TABLES
+def get_table(_connector, dbname, scname) -> pd.DataFrame:
+    sql_cmd3 = 'SHOW TABLES IN '+ str(dbname) + '.' + str(scname) + ';'
+    return pd.read_sql(sql_cmd3, _connector)
+
+
+
 
 
 #############SIDEBAR_2(DATABASES)
@@ -279,6 +286,11 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     st.subheader('Create a new Schema')
     if st.button('Create a new Schema', on_click = callback) or st.session_state.key:
         create_schema(con, sel_data)
+    
+    tables_df = get_table(snowflake_connector, sel_data, sel_schema)
+    sel_table = st.radio("Tables Available", tables_df.name)
+        
+        
 
 
 
@@ -287,8 +299,8 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
 ####SIDEBAR ACTIONS
 if sel_data != '-------------------' :
     #sel_ware == st.selectbox('-------------------')
-    #with st.sidebar:
-    sel_ware = '-------------------'
+    with st.sidebar:
+        sel_ware = '-------------------'
     
 
 
