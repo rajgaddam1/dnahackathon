@@ -268,6 +268,7 @@ if sel_data == 'Create a Database':
 
 ###Action after selecting Database    
 if sel_data != 'Create a Database' and sel_data !=  '-------------------':
+    global sel_schema
     st.subheader('👇 Do you want to Drop '+ str(sel_data) +' Database? 🗑️')
     if st.button('Drop Databse'):
         
