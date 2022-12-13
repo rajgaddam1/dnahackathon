@@ -292,12 +292,12 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     if st.button('Create a new Schema', on_click = callback) or st.session_state.key:
         create_schema(con, sel_data)
     st.subheader('Create a Table/View')
-    if st.button('Create a new table/view', on_click = callback) or st.session_state.key:
-        if sel_schema != 'Select below available Schemas':
+    if sel_schema != 'Select below available Schemas':
+        if st.button('Create a new table/view', on_click = callback) or st.session_state.key:
             create_schema(con, sel_data)
-        else:
-            st.write('Select Schema to create table/view')
-            
+    else:
+        st.write('Select Schema to create table/view')
+        
             
     
     if sel_schema != 'Select below available Schemas':
