@@ -286,7 +286,8 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
 
 ####SIDEBAR ACTIONS
 if sel_data != '-------------------' :
-    sel_ware == '-------------------'
+    with st.sidebar:
+        sel_ware == '-------------------'
     
 
 
