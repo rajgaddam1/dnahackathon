@@ -178,7 +178,7 @@ def create_table(con):
         sql_cmd4 = st.text_input('Enter SQL Query', 'create table <table_name> (<col1_name> <col1_type>)')
     elif select_opt == 'View':
         sql_cmd4 = st.text_input('Enter SQL Query', 'create view <view_name> as <select_statement>;')
-    elif select_opt != 'None':
+    if select_opt != 'None':
         if st.button('Create'):
             try:
                 cur = con.cursor()
