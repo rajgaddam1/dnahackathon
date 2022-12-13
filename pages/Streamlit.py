@@ -292,13 +292,13 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     if st.button('Create a new Schema', on_click = callback) or st.session_state.key:
         create_schema(con, sel_data)
     
-    tables_df = get_table(snowflake_connector, sel_data, sel_schema)
-    sel_table = st.radio("Tables Available", tables_df.name)
+    if sel_schema != 'Select below available Schemas':
+        tables_df = get_table(snowflake_connector, sel_data, sel_schema)
+        if len(tables_df) != 0:
+            sel_table = st.radio("Tables Available", tables_df.name)
+        else:
+            st.write('No tables available')
         
-        
-
-
-
 
 
 ####SIDEBAR ACTIONS
