@@ -154,7 +154,7 @@ def create_schema(con, dbname):
 
         
 #################Function to DROP Databsase       
-def data_database(con, database_name_del):
+def drop_database(con, database_name_del):
     #ware_name_del = st.radio("Select Warehouse to Drop",list_ware)
     sql_cmd = 'DROP DATABASE IF EXISTS ' + str(database_name_del) + ';'
 
@@ -169,8 +169,30 @@ def data_database(con, database_name_del):
     finally:
         cur.close()
     con.close()
-        
     
+############################Create Table/View  
+
+def create_table(con, dbname):
+    select_opt = st.radio('Create', ['None','Table', 'View'])
+    if select_opt == 'Table':
+        sql_cmd4 = st.text_input('Enter SQL Query', 'create table <table_name> (<col1_name> <col1_type>)')
+    elif select_opt == 'View':
+        sql_cmd4 = st.text_input('Enter SQL Query', 'create view <view_name> as <select_statement>;')
+        
+    if st.button('Create Schema'):
+        try:
+            cur = con.cursor()
+            cur.execute(sql_cmd4)
+            st.success('Created')
+        except Exception as e:
+            print(e)
+            #st.exception(e)
+            st.write('Please Enter Valid Inputs')
+        finally:
+            cur.close()
+        con.close()
+     
+
 ################ SIDEBAR_1(WAREHOUSE)###########################
 with st.sidebar:
     sel_ware = st.selectbox("Warehouse",list_ware_up)
@@ -272,7 +294,7 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     st.subheader('👇 Do you want to Drop '+ str(sel_data) +' Database? 🗑️')
     if st.button('Drop Databse'):
         
-        data_database(con, sel_data)
+        drop_database(con, sel_data)
         #pass
     st.subheader('Database Information')
 
@@ -293,7 +315,7 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
         create_schema(con, sel_data)
     st.subheader('Create a Table/View')
     if sel_schema != 'Select below available Schemas':
-        if st.button('Create a new table/view', on_click = callback) or st.session_state.key:
+        if st.button('Create a new Table/iew', on_click = callback) or st.session_state.key:
             create_schema(con, sel_data)
     else:
         st.write('Select Schema to create table/view')
