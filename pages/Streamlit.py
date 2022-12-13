@@ -299,7 +299,8 @@ if sel_data == 'Create a Database':
         create_data(con)
     
     st.subheader('👇 Do you want to Clone Existing Database? 🗑️')
-    if st.button('Clone Databse', on_click = callback)  or st.session_state.key :
+    agree1 = st.checkbox('Clone Database')
+    if agree1:
         clone_data(con)
     st.subheader("👇 Click here to Download full Information about Databases available")
     st.download_button(
