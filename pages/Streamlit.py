@@ -179,7 +179,7 @@ def create_table(con):
     elif select_opt == 'View':
         sql_cmd4 = st.text_input('Enter SQL Query', 'create view <view_name> as <select_statement>;')
         
-    if st.button('Create Schema'):
+    if st.button('Create'):
         try:
             cur = con.cursor()
             cur.execute(sql_cmd4)
