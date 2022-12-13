@@ -291,6 +291,14 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     st.subheader('Create a new Schema')
     if st.button('Create a new Schema', on_click = callback) or st.session_state.key:
         create_schema(con, sel_data)
+    st.subheader('Create a Table/View')
+    if st.button('Create a new table/view', on_click = callback) or st.session_state.key:
+        if sel_schema != 'Select below available Schemas':
+            create_schema(con, sel_data)
+        else:
+            st.write('Select Schema to create table/view')
+            
+            
     
     if sel_schema != 'Select below available Schemas':
         tables_df = get_table(snowflake_connector, sel_data, sel_schema)
