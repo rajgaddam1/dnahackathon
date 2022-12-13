@@ -246,7 +246,7 @@ with st.sidebar:
     
 ###Create Databse Page
 if sel_data == 'Create a Database':
-    st.subheader("👇 Let's Create a new Warehouse in Snowflake")
+    st.subheader("👇 Let's Create a new Database in Snowflake")
     
     if st.button('Create a new database', on_click = callback) or st.session_state.key:
         create_data(con)
@@ -286,8 +286,9 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
 
 ####SIDEBAR ACTIONS
 if sel_data != '-------------------' :
+    #sel_ware == st.selectbox('-------------------')
     with st.sidebar:
-        sel_ware == '-------------------'
+        sel_ware = '-------------------'
     
 
 
