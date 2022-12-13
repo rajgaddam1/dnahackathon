@@ -279,16 +279,17 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     st.subheader('Create a new Schema')
     if st.button('Create a new Schema', on_click = callback) or st.session_state.key:
         create_schema(con, sel_data)
+
+
+
+
+
+####SIDEBAR ACTIONS
+if sel_data != '-------------------' :
+    sel_ware == '-------------------'
     
-    
 
 
-
-
-
-
-   
-#############SIDEBAR_3(Schemas)
   
 #def get_schema(_connector, dbname) -> pd.DataFrame:
     #sql_cmd2 = 'SHOW SCHEMAS IN DATABASE ' + str(dbname) + ';'
