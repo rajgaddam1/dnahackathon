@@ -134,7 +134,7 @@ def clone_data(con):
     source_name = st.text_input('Enter Source Database Name')
     sql_cmd = 'CREATE OR REPLACE DATABASE ' + str(database_name1) + ' CLONE '+ str(source_name)  +';'
         
-    if st.button('Clone Database   '):
+    if st.button('Done'):
         try:
             cur = con.cursor()
             cur.execute(sql_cmd)
