@@ -178,20 +178,20 @@ def create_table(con):
         sql_cmd4 = st.text_input('Enter SQL Query', 'create table <table_name> (<col1_name> <col1_type>)')
     elif select_opt == 'View':
         sql_cmd4 = st.text_input('Enter SQL Query', 'create view <view_name> as <select_statement>;')
-        
-    if st.button('Create'):
-        try:
-            cur = con.cursor()
-            cur.execute(sql_cmd4)
-            st.success('Created')
-        except Exception as e:
-            print(e)
-            #st.exception(e)
-            st.write('Please Enter Valid Inputs')
-        finally:
-            cur.close()
-        con.close()
-     
+    elif select_opt != 'None':
+        if st.button('Create'):
+            try:
+                cur = con.cursor()
+                cur.execute(sql_cmd4)
+                st.success('Created')
+            except Exception as e:
+                print(e)
+                #st.exception(e)
+                st.write('Please Enter Valid Inputs')
+            finally:
+                cur.close()
+            con.close()
+         
 
 ################ SIDEBAR_1(WAREHOUSE)###########################
 with st.sidebar:
