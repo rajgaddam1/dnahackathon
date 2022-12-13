@@ -129,12 +129,12 @@ def create_data(con):
             cur.close()
         con.close()
 ##############################
-def clone_data(con,sel_data):
-    #database_name1 = st.text_input('Enter Database Name')
+def clone_data(con):
+    database_name1 = st.text_input('Enter Database Name')
     source_name = st.text_input('Enter Source Database Name')
-    sql_cmd = 'CREATE OR REPLACE DATABASE ' + str(sel_data) + ' CLONE '+ str(source_name)  +';'
+    sql_cmd = 'CREATE OR REPLACE DATABASE ' + str(database_name1) + ' CLONE '+ str(source_name)  +';'
         
-    if st.button('Create Database'):
+    if st.button('Clone Database'):
         try:
             cur = con.cursor()
             cur.execute(sql_cmd)
@@ -298,6 +298,10 @@ if sel_data == 'Create a Database':
     
     if st.button('Create a new database', on_click = callback) or st.session_state.key:
         create_data(con)
+    
+    st.subheader('👇 Do you want to Clone Existing Database? 🗑️')
+    if st.button('Clone Databse', on_click = callback)  or st.session_state.key :
+        clone_data(con)
     st.subheader("👇 Click here to Download full Information about Databases available")
     st.download_button(
     label = "Download data as CSV",
@@ -315,9 +319,9 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
         
         drop_database(con, sel_data)
         #pass
-    st.subheader('👇 Do you want to Clone Existing Database? 🗑️')
-    if st.button('Clone Databse'):
-        clone_data(con,sel_data)
+    #st.subheader('👇 Do you want to Clone Existing Database? 🗑️')
+    #if st.button('Clone Databse'):
+        #clone_data(con,sel_data)
     
     st.subheader('Database Information')
 
