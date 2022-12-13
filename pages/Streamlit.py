@@ -172,7 +172,7 @@ def drop_database(con, database_name_del):
     
 ############################Create Table/View  
 
-def create_table(con, dbname):
+def create_table(con):
     select_opt = st.radio('Create', ['None','Table', 'View'])
     if select_opt == 'Table':
         sql_cmd4 = st.text_input('Enter SQL Query', 'create table <table_name> (<col1_name> <col1_type>)')
@@ -315,8 +315,8 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
         create_schema(con, sel_data)
     st.subheader('Create a Table/View')
     if sel_schema != 'Select below available Schemas':
-        if st.button('Create a new Table/iew', on_click = callback) or st.session_state.key:
-            create_schema(con, sel_data)
+        if st.button('Create a new Table/View', on_click = callback) or st.session_state.key:
+            create_table(con)
     else:
         st.write('Select Schema to create table/view')
         
