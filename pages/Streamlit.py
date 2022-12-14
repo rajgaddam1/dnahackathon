@@ -282,7 +282,15 @@ def get_table(_connector, dbname, scname) -> pd.DataFrame:
     sql_cmd3 = 'SHOW TABLES IN '+ str(dbname) + '.' + str(scname) + ';'
     return pd.read_sql(sql_cmd3, _connector)
 
+######SHOW ROLES
+def get_role(_connector) -> pd.DataFrame:
+    return pd.read_sql("SHOW ROLES", _connector)
 
+roles_df = get_role(snowflake_connector)
+
+list_role = roles_df['name'].to_list()
+list_up1 = ['-------------------', 'Create a Role']
+list_role_up = list_up1 + list_role
 
 
 
@@ -314,7 +322,7 @@ if sel_data == 'Create a Database':
 ###Action after selecting Database    
 if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     global sel_schema
-    st.subheader('👇 Do you want to Drop '+ str(sel_data) +' Database? 🗑️')
+    st.subheader('👇 Do you want to Drop '+ str(sel_data) +' Database?')
     if st.button('Drop Databse'):
         
         drop_database(con, sel_data)
@@ -356,6 +364,18 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
         else:
             st.write('No tables available')
         
+#############SIDEBAR_3(Roles)
+with st.sidebar:
+    global sel_role
+    sel_role = st.selectbox("Role", list_role_up)
+
+
+
+
+
+
+
+
 
 
 ####SIDEBAR ACTIONS
