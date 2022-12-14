@@ -349,7 +349,7 @@ def create_user(con):
         try:
             cur = con.cursor()
             cur.execute(sql_cmd6)
-            st.success('User has been created. Plese note the password is welcome and must change password on first time login')
+            st.success('User has been created. Plese note the default password is welcome and user must change password on first time login')
         except Exception as e:
             print(e)
             #st.exception(e)
