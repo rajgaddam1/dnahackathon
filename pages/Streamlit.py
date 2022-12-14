@@ -506,10 +506,6 @@ if sel_user != 'Create a User' and sel_user != '-------------------' :
     st.dataframe(users_df[['name', 'display_name ']].loc[users_df['name'] == sel_user])
 
 
-
-
-']
-
 ####SIDEBAR ACTIONS
 if sel_data != '-------------------' :
     #sel_ware == st.selectbox('-------------------')
