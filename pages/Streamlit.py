@@ -6,7 +6,7 @@ warnings.filterwarnings("ignore")
 import pandas as pd
 from snowflake.connector.connection import SnowflakeConnection
 from PIL import Image
-
+import configparser
 
 
 ##########Sidebar Logo
