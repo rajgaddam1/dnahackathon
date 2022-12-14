@@ -508,7 +508,7 @@ if sel_user != 'Create a User' and sel_user != '-------------------' :
 #######SIDEBAR_4(USERS)
 with st.sidebar:
     global sel_report
-    sel_report = st.selectbox('Publish Report', ['-------------------', 'Get Publish Report'])
+    sel_report = st.selectbox('Reports', ['-------------------', 'Get Publish Report'])
 
 if sel_report == 'Get Publish Report':
     st.subheader('Publish Report')
