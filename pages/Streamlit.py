@@ -455,7 +455,7 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
             if agree3:
                 #show_query(con,sel_data,sel_schema)
                 tables_df_query = get_table(snowflake_connector, sel_data, sel_schema)
-                query_df = show_query(con,sel_data,sel_schema, tables_df_query)
+                query_df = show_query(snowflake_connector,sel_data,sel_schema, tables_df_query)
                 st.dataframe(query_df)
             
             create_table(con)
