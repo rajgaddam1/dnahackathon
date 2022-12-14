@@ -315,19 +315,18 @@ def create_role(con):
 def drop_role(con, sel_role):
     #role_name = st.text_input('Enter Role Name')
     sql_cmd5 = 'DROP ROLE ' + str(sel_role) + ';'
-    if st.button('Drop'):
-        try:
-            cur = con.cursor()
-            cur.execute(sql_cmd5)
-            st.success('Role has been Dropped')
-        except Exception as e:
-            print(e)
-            #st.exception(e)
-            st.write('An error has occured please check logs')
-        finally:
-            cur.close()
-        con.close()
-        
+    try:
+        cur = con.cursor()
+        cur.execute(sql_cmd5)
+        st.success('Role has been Dropped')
+    except Exception as e:
+        print(e)
+        #st.exception(e)
+        st.write('An error has occured please check logs')
+    finally:
+        cur.close()
+    con.close()
+    
 
 
 #############SIDEBAR_2(DATABASES)
