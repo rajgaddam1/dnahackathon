@@ -511,7 +511,7 @@ with st.sidebar:
     sel_report = st.selectbox('Publish Report', ['-------------------', 'Get Publish Report'])
 
 if sel_report == 'Get Publish Report':
-    st.title('Publish Report')
+    st.subheader('Publish Report')
     sel_days = st.radio("Get Objects Created or Modified", ['Last Day', 'Last 7 Days', 'Last 14 days'])
 
     
