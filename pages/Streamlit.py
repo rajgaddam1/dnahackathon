@@ -278,10 +278,14 @@ def get_schema(_connector, dbname) -> pd.DataFrame:
     sql_cmd2 = 'SHOW SCHEMAS IN DATABASE ' + str(dbname) + ';'
     return pd.read_sql(sql_cmd2, _connector)
 
+
+
 ####SHOW TABLES
 def get_table(_connector, dbname, scname) -> pd.DataFrame:
     sql_cmd3 = 'SHOW TABLES IN '+ str(dbname) + '.' + str(scname) + ';'
     return pd.read_sql(sql_cmd3, _connector)
+
+
 
 ######SHOW ROLES
 def get_role(_connector) -> pd.DataFrame:
@@ -307,9 +311,10 @@ list_user_up = list_up3 + list_user
 
 user_csv = convert_df(users_df)
 
-###################
-def show_query(_connector, dbname, scname) -> pd.DataFrame:
-    sel_table1 = st.radio("Tables Available", tables_df.name)
+###################Function to display Query for copy
+
+def show_query(_connector, dbname, scname, tables_df_query) -> pd.DataFrame:
+    sel_table1 = st.radio("Tables Available", tables_df_query.name)
     cmd = "select get_ddl('table', " + str(dbname)+ "." + str(scname) + "." + str(sel_table1) + " ,True) As Query"
     return pd.read_sql(cmd, _connector)
 
@@ -415,7 +420,7 @@ if sel_data == 'Create a Database':
 ###Action after selecting Database    
 if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     global sel_schema
-    global table_df
+    #global table_df
     st.subheader('👇 Do you want to Drop '+ str(sel_data) +' Database?')
     if st.button('Drop Databse'):
         
@@ -449,7 +454,8 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
             agree3 = st.checkbox('Copy query from existing Table')
             if agree3:
                 #show_query(con,sel_data,sel_schema)
-                query_df = show_query(con,sel_data,sel_schema)
+                tables_df_query = get_table(snowflake_connector, sel_data, sel_schema)
+                query_df = show_query(con,sel_data,sel_schema, tables_df_query)
                 st.dataframe(query_df)
             
             create_table(con)
