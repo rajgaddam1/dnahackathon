@@ -307,6 +307,14 @@ list_user_up = list_up3 + list_user
 
 user_csv = convert_df(users_df)
 
+###################
+def show_query(_connector, dbname, scname) -> pd.DataFrame:
+    sel_table1 = st.radio("Tables Available", tables_df.name)
+    cmd = "select get_ddl('table', " + str(dbname)+ "." + str(scname) + "." + str(sel_table1) + " ,True) As Query"
+    return pd.read_sql(cmd, _connector)
+
+
+
 
 ##### Function to create Role CREATE ROLE
 def create_role(con):
@@ -407,6 +415,7 @@ if sel_data == 'Create a Database':
 ###Action after selecting Database    
 if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     global sel_schema
+    global table_df
     st.subheader('👇 Do you want to Drop '+ str(sel_data) +' Database?')
     if st.button('Drop Databse'):
         
@@ -436,6 +445,13 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     st.subheader('Create a Table/View')
     if sel_schema != 'Select below available Schemas':
         if st.button('Create a new Table/View', on_click = callback) or st.session_state.key:
+            ###############Copy Query
+            agree3 = st.checkbox('Copy query from existing Table')
+            if agree3:
+                #show_query(con,sel_data,sel_schema)
+                query_df = show_query(con,sel_data,sel_schema)
+                st.dataframe(query_df)
+            
             create_table(con)
     else:
         st.write('Select Schema to create table/view')
@@ -515,27 +531,3 @@ if sel_report == 'Get Publish Report':
     sel_days = st.radio("Get Objects Created or Modified", ['Last Day', 'Last 7 Days', 'Last 14 days'])
 
     
-
-
-
-####SIDEBAR ACTIONS
-if sel_data != '-------------------' :
-    #sel_ware == st.selectbox('-------------------')
-    with st.sidebar:
-        sel_ware = '-------------------'
-    
-
-
-  
-#def get_schema(_connector, dbname) -> pd.DataFrame:
-    #sql_cmd2 = 'SHOW SCHEMAS IN DATABASE ' + str(dbname) + ';'
-    #return pd.read_sql(sql_cmd2, _connector)
- 
-#if sel_data != 'Create a Database' and sel_data != '-------------------'  :
-    #global sel_schema
-    #schemas_df = get_schema(snowflake_connector, sel_data)
-    #sc_list_data = schemas_df['name'].to_list()
-    #sc_list_up = ['Select below available Schemas']
-    #sc_list_data_up = sc_list_up + sc_list_data
-    #with st.sidebar:
-        #sel_schema = st.radio("Schema",sc_list_data_up)
