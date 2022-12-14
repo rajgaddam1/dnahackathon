@@ -495,7 +495,8 @@ if sel_user == 'Create a User':
     file_name = 'User_info.csv',
     mime = 'text/csv',)
 
-if sel_user != 'Create a User' and sel_role != '-------------------':
+if sel_user != 'Create a User' and sel_user != '-------------------' :
+    
     st.subheader('👇 Do you want to Drop User '+ str(sel_user) +'?')
     if st.button('Drop User'):
         drop_user(con, sel_role)
@@ -507,7 +508,7 @@ if sel_user != 'Create a User' and sel_role != '-------------------':
 
 
 
-
+']
 
 ####SIDEBAR ACTIONS
 if sel_data != '-------------------' :
