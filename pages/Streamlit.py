@@ -505,6 +505,18 @@ if sel_user != 'Create a User' and sel_user != '-------------------' :
 
     st.dataframe(users_df[['name', 'has_password']].loc[users_df['name'] == sel_user])
 
+#######SIDEBAR_4(USERS)
+with st.sidebar:
+    global sel_report
+    sel_report = st.selectbox('Publish Report', ['-------------------', 'Get Publish Report'])
+
+if sel_report == 'Get Publish Report':
+    st.title('Publish Report')
+    sel_days = st.radio("Get Objects Created or Modified", ['Last Day', 'Last 7 Days', 'Last 14 days'])
+
+    
+
+
 
 ####SIDEBAR ACTIONS
 if sel_data != '-------------------' :
