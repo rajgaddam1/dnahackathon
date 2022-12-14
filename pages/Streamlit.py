@@ -343,12 +343,13 @@ def drop_role(con, sel_role):
 ###### Function to create Role CREATE ROLE
 def create_user(con):
     role_name = st.text_input('Enter User Name')
-    sql_cmd6 = 'CREATE OR REPLACE USER ' + str(role_name) + ';'
+    role_email = st.text_input('Enter Email Address')
+    sql_cmd6 = 'CREATE OR REPLACE USER ' + str(role_name) +' PASSWORD = welcome EMAIL = '+ str(role_email)+ ' MUST_CHANGE_PASSWORD = TRUE' +';'
     if st.button('Create User'):
         try:
             cur = con.cursor()
             cur.execute(sql_cmd6)
-            st.success('User has been created')
+            st.success('User has been created. Plese note the password is welcome and must change password on first time login')
         except Exception as e:
             print(e)
             #st.exception(e)
