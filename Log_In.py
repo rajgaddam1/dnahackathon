@@ -9,11 +9,11 @@ password = os.environ.get('password')
 account = os.environ.get('account')
 
 st.set_page_config(
-    page_title="Sign in to Snowflake ❄️",
+    page_title="Sign in to Snowflake",
     page_icon="👋",
 )
 
-st.title("Sign in to Snowflake ❄️")
+st.title("Sign in to Snowflake")
 
 
 
