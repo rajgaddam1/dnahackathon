@@ -418,6 +418,16 @@ if sel_role == 'Create a Role':
     file_name = 'Roles_info.csv',
     mime = 'text/csv',)
 
+if sel_role != 'Create a Role' and sel_role != '-------------------':
+    st.subheader('👇 Do you want to Drop '+ str(sel_role) +' Role?')
+    if st.button('Drop Role'):
+        drop_role(con)
+        
+    st.subheader('Role Information')
+
+    st.dataframe(roles_df[['name', 'comment']].loc[roles_df['name'] == sel_role])
+    
+
 
 
 ####SIDEBAR ACTIONS
