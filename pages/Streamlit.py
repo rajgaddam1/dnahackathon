@@ -12,8 +12,9 @@ from PIL import Image
 ##########Sidebar Logo
 with st.sidebar:
     image = Image.open('Infosys_logo.JPG')
+    new_image = image.resize((60, 40))
     st.write("Snowflake Hackathon ❄️")
-    st.image(image)
+    st.image(new_image)
     st.success("You are successfully logged in")
 
 #############
