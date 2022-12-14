@@ -464,7 +464,7 @@ with st.sidebar:
     global sel_user
     sel_user = st.selectbox("User", list_user_up)
     
-if sel_role == 'Create a User':
+if sel_user == 'Create a User':
     
     st.subheader("👇 Let's Create a new User in Snowflake")
     if st.button('Create a new User', on_click = callback) or st.session_state.key:
