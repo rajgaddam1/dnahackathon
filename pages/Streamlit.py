@@ -292,6 +292,42 @@ list_role = roles_df['name'].to_list()
 list_up1 = ['-------------------', 'Create a Role']
 list_role_up = list_up1 + list_role
 
+role_csv = convert_df(roles_df)
+
+##### Function to create Role CREATE ROLE
+def create_role(con):
+    role_name = st.text_input('Enter Role Name')
+    sql_cmd5 = 'CREATE OR REPLACE ROLE  ' + str(role_name) + ';'
+    if st.button('Create Role'):
+        try:
+            cur = con.cursor()
+            cur.execute(sql_cmd5)
+            st.success('Role has been created')
+        except Exception as e:
+            print(e)
+            #st.exception(e)
+            st.write('An error has occured please check logs')
+        finally:
+            cur.close()
+        con.close()
+
+###Function to DROP ROLE
+def drop_role(con):
+    role_name = st.text_input('Enter Role Name')
+    sql_cmd5 = 'DROP ROLE ' + str(role_name) + ';'
+    if st.button('Drop'):
+        try:
+            cur = con.cursor()
+            cur.execute(sql_cmd5)
+            st.success('Role has been Dropped')
+        except Exception as e:
+            print(e)
+            #st.exception(e)
+            st.write('An error has occured please check logs')
+        finally:
+            cur.close()
+        con.close()
+        
 
 
 #############SIDEBAR_2(DATABASES)
@@ -368,13 +404,19 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
 with st.sidebar:
     global sel_role
     sel_role = st.selectbox("Role", list_role_up)
-
-
-
-
-
-
-
+    
+if sel_role == 'Create a Role':
+    
+    st.subheader("👇 Let's Create a new Role in Snowflake")
+    if st.button('Create a new Role', on_click = callback) or st.session_state.key:
+        create_role(con)
+        
+    st.subheader("👇 Click here to Download full Information about Roles available")
+    st.download_button(
+    label = "Download data as CSV",
+    data = role_csv,
+    file_name = 'Roles_info.csv',
+    mime = 'text/csv',)
 
 
 
