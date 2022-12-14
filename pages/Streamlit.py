@@ -312,9 +312,9 @@ def create_role(con):
         con.close()
 
 ###Function to DROP ROLE
-def drop_role(con):
-    role_name = st.text_input('Enter Role Name')
-    sql_cmd5 = 'DROP ROLE ' + str(role_name) + ';'
+def drop_role(con, sel_role):
+    #role_name = st.text_input('Enter Role Name')
+    sql_cmd5 = 'DROP ROLE ' + str(sel_role) + ';'
     if st.button('Drop'):
         try:
             cur = con.cursor()
@@ -421,7 +421,7 @@ if sel_role == 'Create a Role':
 if sel_role != 'Create a Role' and sel_role != '-------------------':
     st.subheader('👇 Do you want to Drop '+ str(sel_role) +' Role?')
     if st.button('Drop Role'):
-        drop_role(con)
+        drop_role(con, sel_role)
         
     st.subheader('Role Information')
 
