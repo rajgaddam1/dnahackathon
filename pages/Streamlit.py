@@ -289,10 +289,23 @@ def get_role(_connector) -> pd.DataFrame:
 roles_df = get_role(snowflake_connector)
 
 list_role = roles_df['name'].to_list()
-list_up1 = ['-------------------', 'Create a Role']
-list_role_up = list_up1 + list_role
+list_up2 = ['-------------------', 'Create a Role']
+list_role_up = list_up2 + list_role
 
 role_csv = convert_df(roles_df)
+
+#######SHOW USERS
+def get_user(_connector) -> pd.DataFrame:
+    return pd.read_sql("SHOW USERS", _connector)
+
+users_df = get_user(snowflake_connector)
+
+list_user = users_df['name'].to_list()
+list_up3 = ['-------------------', 'Create a User']
+list_user_up = list_up3 + list_role
+
+user_csv = convert_df(users_df)
+
 
 ##### Function to create Role CREATE ROLE
 def create_role(con):
@@ -326,6 +339,25 @@ def drop_role(con, sel_role):
     finally:
         cur.close()
     con.close()
+
+###### Function to create Role CREATE ROLE
+def create_user(con):
+    role_name = st.text_input('Enter User Name')
+    sql_cmd6 = 'CREATE OR REPLACE USER ' + str(role_name) + ';'
+    if st.button('Create User'):
+        try:
+            cur = con.cursor()
+            cur.execute(sql_cmd6)
+            st.success('User has been created')
+        except Exception as e:
+            print(e)
+            #st.exception(e)
+            st.write('An error has occured please check logs')
+        finally:
+            cur.close()
+        con.close()
+
+
     
 
 
@@ -426,6 +458,29 @@ if sel_role != 'Create a Role' and sel_role != '-------------------':
 
     st.dataframe(roles_df[['name', 'comment']].loc[roles_df['name'] == sel_role])
     
+
+#######SIDEBAR_4(USERS)
+with st.sidebar:
+    global sel_user
+    sel_user = st.selectbox("User", list_user_up)
+    
+if sel_role == 'Create a User':
+    
+    st.subheader("👇 Let's Create a new User in Snowflake")
+    if st.button('Create a new User', on_click = callback) or st.session_state.key:
+        create_user(con)
+        
+    st.subheader("👇 Click here to Download full Information about Users available")
+    st.download_button(
+    label = "Download data as CSV",
+    data = user_csv,
+    file_name = 'User_info.csv',
+    mime = 'text/csv',)
+
+
+
+
+
 
 
 
