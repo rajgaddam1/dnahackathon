@@ -357,6 +357,22 @@ def create_user(con):
         finally:
             cur.close()
         con.close()
+###Function to DROP USER
+def drop_user(con, sel_user):
+    #role_name = st.text_input('Enter Role Name')
+    sql_cmd5 = 'DROP USER ' + str(sel_user) + ';'
+    try:
+        cur = con.cursor()
+        cur.execute(sql_cmd5)
+        st.success('User has been Dropped')
+    except Exception as e:
+        print(e)
+        #st.exception(e)
+        st.write('An error has occured please check logs')
+    finally:
+        cur.close()
+    con.close()
+
 
 
     
@@ -478,7 +494,14 @@ if sel_user == 'Create a User':
     file_name = 'User_info.csv',
     mime = 'text/csv',)
 
+if sel_user != 'Create a User' and sel_role != '-------------------':
+    st.subheader('👇 Do you want to Drop User '+ str(sel_user) +'?')
+    if st.button('Drop User'):
+        drop_user(con, sel_role)
+        
+    st.subheader('User Information')
 
+    st.dataframe(users_df[['name', 'display_name ']].loc[users_df['name'] == sel_user])
 
 
 
