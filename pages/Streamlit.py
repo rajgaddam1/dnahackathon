@@ -302,7 +302,7 @@ users_df = get_user(snowflake_connector)
 
 list_user = users_df['name'].to_list()
 list_up3 = ['-------------------', 'Create a User']
-list_user_up = list_up3 + list_role
+list_user_up = list_up3 + list_user
 
 user_csv = convert_df(users_df)
 
