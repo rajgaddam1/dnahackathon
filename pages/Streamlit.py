@@ -561,14 +561,9 @@ if sel_report == 'Get Publish Report':
         report3_df = get_report3(snowflake_connector)
         st.dataframe(report3_df)    
     
-    
-#######HOME PAGE
-if sel_ware == '-------------------' and sel_data == '-------------------' and sel_role == '-------------------'  and sel_user == '-------------------' and sel_report == '-------------------':
-    st.title('SNOWFLAKE CLIENT')
-    sel_role1 = st.selectbox("Role", ['DCM_USER', 'ACCOUNTADMIN', 'ORGADMIN', 'PUBLIC', 'SYSADMIN'])
-    sel_ware1 = st.selectbox("User", ['DNAHCK_W', 'DNAHACK','SNOWFLAKE'])
-
+########SQL Window
 with st.sidebar:
+    global sql_window
     sql_window = st.checkbox('SQL Window')
     if sql_window:
         st.title('SNOWFLAKE CLIENT')
@@ -578,6 +573,16 @@ with st.sidebar:
         if st.button('Enter SQL'):
             pass
         
+
+
+    
+#######HOME PAGE
+if sel_ware == '-------------------' and sel_data == '-------------------' and sel_role == '-------------------'  and sel_user == '-------------------' and sel_report == '-------------------' and not sql_window:
+    st.title('SNOWFLAKE CLIENT')
+    sel_role1 = st.selectbox("Role", ['DCM_USER', 'ACCOUNTADMIN', 'ORGADMIN', 'PUBLIC', 'SYSADMIN'])
+    sel_ware1 = st.selectbox("User", ['DNAHCK_W', 'DNAHACK','SNOWFLAKE'])
+
+
         
 
     
