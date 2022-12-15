@@ -565,6 +565,8 @@ if sel_report == 'Get Publish Report':
 #######HOME PAGE
 if sel_ware == '-------------------' and sel_data == '-------------------' and sel_role == '-------------------'  and sel_user == '-------------------' and sel_report == '-------------------':
     st.title('SNOWFLAKE CLIENT')
+    sel_role1 = st.selectbox("Role", ['DCM_USER', 'ACCOUNTADMIN', 'ORGADMIN', 'PUBLIC', 'SYSADMIN'])
+    sel_ware1 = st.selectbox("User", ['DNAHCK_W', 'DNAHACK','SNOWFLAKE'])
     
 
     
