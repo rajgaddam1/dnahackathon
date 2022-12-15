@@ -54,7 +54,7 @@ def intro():
 
     password1 = st.text_input('Password',label_visibility="visible",type='password')
     #agree = st.button('Submit')
-    if st.button("submit"):
+    if st.button("Sign in"):
         if user == user_name1 and password == password1 and account == account_name:
             
             st.write('Logged in Successfully')
