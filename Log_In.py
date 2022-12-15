@@ -3,16 +3,21 @@ import os
 import snowflake.connector
 import warnings
 warnings.filterwarnings("ignore")
+from PIL import Image
 
 user = os.environ.get('user')
 password = os.environ.get('password')
 account = os.environ.get('account')
 
 st.set_page_config(
-    page_title="Sign in to Snowflake",
+    page_title="Sign in to Snowflake ❄️",
     page_icon="👋",
 )
 
+
+image = Image.open('Infosys_logo.JPG')
+image1 = image.resize(400,200)
+st.image(image)
 st.title("Sign in to Snowflake")
 
 
