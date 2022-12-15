@@ -16,7 +16,7 @@ st.set_page_config(
 
 
 image = Image.open('Infosys_logo.JPG')
-image1 = image.resize(400,200)
+image1 = image.resize((200, 120))
 st.image(image)
 st.title("Sign in to Snowflake")
 
