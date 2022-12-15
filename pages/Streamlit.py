@@ -306,7 +306,11 @@ user_csv = convert_df(users_df)
 def show_query(_connector, dbname, scname, tables_df_query) -> pd.DataFrame:
     sel_table2 = st.radio("Table Available", tables_df_query.name)
     str1 = str(dbname)+ "." + str(scname) + "." + str(sel_table2)
-    cmd1 = "select get_ddl('table'," + f" '{str1}' " + ",True) As Query"
+    #cmd1 = "select get_ddl('table'," + f" '{str1}' " + ",True) As Query"
+    cmd1 = "SELECT * FROM TABLE(DB1.PUBLIC.get_object_ddl1('table'," + f" '{str1}' "  +"db1.public.emp',true));"
+    st.write(cmd1)
+    #cmd1 =  "select * from get_ddl('table'," + f" '{str1}' " + ",True) As Query"
+    #cmd1 = "select * from get_ddl('table'," + f" '{str1}' " + ",True) As Query"
     return pd.read_sql(cmd1, _connector)
 
 ########Publish Report 1
