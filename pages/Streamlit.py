@@ -8,15 +8,7 @@ from snowflake.connector.connection import SnowflakeConnection
 from PIL import Image
 import configparser
 
-''' Remove Sidebar Logo
-##########Sidebar Logo
-with st.sidebar:
-    image = Image.open('Infosys_logo.JPG')
-    new_image = image.resize((60, 40))
-    st.write("Snowflake Hackathon ❄️")
-    st.image(new_image)
-    st.success("You are successfully logged in")
-'''
+
 #############
 ##To manage bug in sreamlit(Intialize button click)
 if 'key' not in st.session_state:
