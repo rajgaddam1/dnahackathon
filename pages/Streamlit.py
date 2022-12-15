@@ -5,7 +5,7 @@ import warnings
 warnings.filterwarnings("ignore")
 import pandas as pd
 from snowflake.connector.connection import SnowflakeConnection
-#from PIL import Image
+from PIL import Image
 
 #############
 ##To manage bug in sreamlit(Intialize button click)
@@ -14,7 +14,14 @@ if 'key' not in st.session_state:
 
 def callback():
     st.session_state.key = True
-    
+
+##############Sidebar Logo
+with st.sidebar:
+    image = Image.open('Infosys_logo.JPG')
+    new_image = image.resize((60, 40))
+    st.image(new_image)
+
+
 ###Function to convert data to csv
 
 @st.cache
@@ -554,4 +561,8 @@ if sel_report == 'Get Publish Report':
         report3_df = get_report3(snowflake_connector)
         st.dataframe(report3_df)    
     
-   
+    
+
+
+
+    
