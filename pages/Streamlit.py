@@ -304,7 +304,7 @@ user_csv = convert_df(users_df)
 ###################Function to display Query for copy
 
 def show_query(_connector, dbname, scname, tables_df_query) -> pd.DataFrame:
-    sel_table3 = st.radio("Table Available 1", tables_df_query.name, key = 5)
+    sel_table3 = st.radio("Table Available 1", tables_df_query.name, key = 'c')
     str1 = str(dbname)+ "." + str(scname) + "." + str(sel_table3)
     #cmd1 = "select get_ddl('table'," + f" '{str1}' " + ",True) As Query"
     cmd1 = "SELECT * FROM TABLE(DB1.PUBLIC.get_object_ddl1('table'," + f" '{str1}' "  +",true));"
@@ -441,7 +441,7 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     sc_list_up = ['Select below available Schemas']
     sc_list_data_up = sc_list_up + sc_list_data
 
-    sel_schema = st.radio("Schemas Available",sc_list_data_up, key =10)
+    sel_schema = st.radio("Schemas Available",sc_list_data_up, key = 'b')
 
     
     st.subheader('Create a new Schema')
@@ -468,7 +468,7 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     if sel_schema != 'Select below available Schemas':
         tables_df = get_table(snowflake_connector, sel_data, sel_schema)
         if len(tables_df) != 0:
-            sel_table = st.radio("Tables Available", tables_df.name,key = 2)
+            sel_table = st.radio("Tables Available", tables_df.name,key = 'a')
         else:
             st.write('No tables available')
         
