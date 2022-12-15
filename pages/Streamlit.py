@@ -418,7 +418,7 @@ if sel_data == 'Create a Database':
     file_name = 'Database_info.csv',
     mime = 'text/csv',)
     
-    st.subheader("👇 Click here to Copy Query from existing table")
+    st.subheader("👇 Do you want to Copy Query from existing objects")
     agree3 = st.checkbox('Copy query from existing Table')
     if agree3:
         query_df = show_query(snowflake_connector)
@@ -554,8 +554,4 @@ if sel_report == 'Get Publish Report':
         report3_df = get_report3(snowflake_connector)
         st.dataframe(report3_df)    
     
-    
-
-
-
-    
+   
