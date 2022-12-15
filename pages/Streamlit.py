@@ -303,12 +303,13 @@ user_csv = convert_df(users_df)
 
 ###################Function to display Query for copy
 
-def show_query(_connector, dbname, scname, tables_df_query) -> pd.DataFrame:
-    sel_table3 = st.selectbox("Table Available 1", tables_df_query.name)
-    str1 = str(dbname)+ "." + str(scname) + "." + str(sel_table3)
+def show_query(_connector) -> pd.DataFrame:
+    #sel_table3 = st.radio("Table Available 1", tables_df_query.name)
+    #str1 = str(dbname)+ "." + str(scname) + "." + str(sel_table3)
     #cmd1 = "select get_ddl('table'," + f" '{str1}' " + ",True) As Query"
+    str1 = st.text_input('Enter Table Name')
     cmd1 = "SELECT * FROM TABLE(DB1.PUBLIC.get_object_ddl1('table'," + f" '{str1}' "  +",true));"
-    st.write(cmd1)
+    #st.write(cmd1)
     #cmd1 =  "select * from get_ddl('table'," + f" '{str1}' " + ",True) As Query"
     #cmd1 = "select * from get_ddl('table'," + f" '{str1}' " + ",True) As Query"
     return pd.read_sql(cmd1, _connector)
@@ -413,9 +414,14 @@ if sel_data == 'Create a Database':
     label = "Download data as CSV",
     data = database_csv,
     file_name = 'Database_info.csv',
-    mime = 'text/csv',
-)
+    mime = 'text/csv',)
     
+    st.subheader("👇 Click here to Copy Query from existing table")
+    agree3 = st.checkbox('Copy query from existing Table')
+    if agree3:
+        query_df = show_query(snowflake_connector)
+        st.dataframe(query_df)
+
 
 ###Action after selecting Database    
 if sel_data != 'Create a Database' and sel_data !=  '-------------------':
@@ -441,7 +447,7 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     sc_list_up = ['Select below available Schemas']
     sc_list_data_up = sc_list_up + sc_list_data
 
-    sel_schema = st.radio("Schemas Available",sc_list_data_up, key = 'b')
+    sel_schema = st.radio("Schemas Available",sc_list_data_up)
 
     
     st.subheader('Create a new Schema')
@@ -451,13 +457,13 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     if sel_schema != 'Select below available Schemas':
         if st.button('Create a new Table/View', on_click = callback) or st.session_state.key:
             ###############Copy Query
-            agree3 = st.checkbox('Copy query from existing Table')
-            if agree3:
+            #agree3 = st.checkbox('Copy query from existing Table')
+            #if agree3:
                 
-                tables_df_query = get_table(snowflake_connector, sel_data, sel_schema)
-                show_query(con,sel_data,sel_schema,tables_df_query)
-                query_df = show_query(snowflake_connector,sel_data,sel_schema, tables_df_query)
-                st.dataframe(query_df)
+               #tables_df_query = get_table(snowflake_connector, sel_data, sel_schema)
+                #show_query(con,sel_data,sel_schema,tables_df_query)
+                #query_df = show_query(snowflake_connector,sel_data,sel_schema, tables_df_query)
+                #st.dataframe(query_df)
             
             create_table(con)
     else:
@@ -468,7 +474,7 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     if sel_schema != 'Select below available Schemas':
         tables_df = get_table(snowflake_connector, sel_data, sel_schema)
         if len(tables_df) != 0:
-            sel_table = st.radio("Tables Available", tables_df.name,key = 'a')
+            sel_table = st.radio("Tables Available", tables_df.name)
         else:
             st.write('No tables available')
         
