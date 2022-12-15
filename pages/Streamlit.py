@@ -304,8 +304,8 @@ user_csv = convert_df(users_df)
 ###################Function to display Query for copy
 
 def show_query(_connector, dbname, scname, tables_df_query) -> pd.DataFrame:
-    sel_table2 = st.radio("Table Available", tables_df_query.name)
-    str1 = str(dbname)+ "." + str(scname) + "." + str(sel_table2)
+    sel_table3 = st.radio("Table Available 1", tables_df_query.name)
+    str1 = str(dbname)+ "." + str(scname) + "." + str(sel_table3)
     #cmd1 = "select get_ddl('table'," + f" '{str1}' " + ",True) As Query"
     cmd1 = "SELECT * FROM TABLE(DB1.PUBLIC.get_object_ddl1('table'," + f" '{str1}' "  +",true));"
     st.write(cmd1)
