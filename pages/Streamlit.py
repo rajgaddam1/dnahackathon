@@ -441,7 +441,7 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     sc_list_up = ['Select below available Schemas']
     sc_list_data_up = sc_list_up + sc_list_data
 
-    sel_schema = st.radio("Schemas Available",sc_list_data_up)
+    sel_schema = st.radio("Schemas Available",sc_list_data_up, key =10)
 
     
     st.subheader('Create a new Schema')
