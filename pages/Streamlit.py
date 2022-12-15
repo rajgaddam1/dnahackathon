@@ -315,9 +315,19 @@ user_csv = convert_df(users_df)
 
 def show_query(_connector, dbname, scname, tables_df_query) -> pd.DataFrame:
     sel_table1 = st.radio("Tables Available", tables_df_query.name)
+    str1 = str(dbname)+ "." + str(scname) + "." + str(tables_df_query)
     cmd = "select get_ddl('table', " + str(dbname)+ "." + str(scname) + "." + str(sel_table1) + " ,True) As Query"
     return pd.read_sql(cmd, _connector)
 
+########Publish Report 1
+def get_report1(_connector) -> pd.DataFrame:
+    return pd.read_sql("SELECT * FROM TABLE(DB1.PUBLIC.GET_PUBLISH_REPORT(-1));", _connector)
+
+def get_report2(_connector) -> pd.DataFrame:
+    return pd.read_sql("SELECT * FROM TABLE(DB1.PUBLIC.GET_PUBLISH_REPORT(-7));", _connector)
+
+def get_report3(_connector) -> pd.DataFrame:
+    return pd.read_sql("SELECT * FROM TABLE(DB1.PUBLIC.GET_PUBLISH_REPORT(-14));", _connector)
 
 
 
@@ -388,10 +398,6 @@ def drop_user(con, sel_user):
     con.close()
 
 
-
-    
-
-
 #############SIDEBAR_2(DATABASES)
 with st.sidebar:
     global sel_data
@@ -451,12 +457,12 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     if sel_schema != 'Select below available Schemas':
         if st.button('Create a new Table/View', on_click = callback) or st.session_state.key:
             ###############Copy Query
-            agree3 = st.checkbox('Copy query from existing Table')
-            if agree3:
+            #agree3 = st.checkbox('Copy query from existing Table')
+            #if agree3:
                 #show_query(con,sel_data,sel_schema)
-                tables_df_query = get_table(snowflake_connector, sel_data, sel_schema)
-                query_df = show_query(snowflake_connector,sel_data,sel_schema, tables_df_query)
-                st.dataframe(query_df)
+                #tables_df_query = get_table(snowflake_connector, sel_data, sel_schema)
+                #query_df = show_query(snowflake_connector,sel_data,sel_schema, tables_df_query)
+                #st.dataframe(query_df)
             
             create_table(con)
     else:
@@ -534,6 +540,19 @@ with st.sidebar:
 
 if sel_report == 'Get Publish Report':
     st.subheader('Publish Report')
-    sel_days = st.radio("Get Objects Created or Modified", ['Last Day', 'Last 7 Days', 'Last 14 days'])
+    sel_days = st.radio("Get Objects Created or Modified", ['None','Last Day', 'Last 7 Days', 'Last 14 days'])
+    if sel_days == 'Last Day':
+        report1_df = get_report1(snowflake_connector)
+        st.dataframe(report1_df)
+    if sel_days == 'Last 7 Days':
+        report2_df = get_report2(snowflake_connector)
+        st.dataframe(report2_df)
+    if sel_days == 'Last 14 days':
+        report3_df = get_report3(snowflake_connector)
+        st.dataframe(report3_df)    
+    
+    
+
+
 
     
