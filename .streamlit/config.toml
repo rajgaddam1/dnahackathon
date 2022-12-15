@@ -1,5 +1,15 @@
 [theme]
 primaryColor="#FF7903"
+backgroundColor="#f0f0f5"
+secondaryBackgroundColor="#31333F"
+textColor="#FAFAFA"
+font="sans serif"
+
+
+
+
+[theme_Dark]
+primaryColor="#FF7903"
 backgroundColor="#0E1117"
 secondaryBackgroundColor="#31333F"
 textColor="#FAFAFA"
