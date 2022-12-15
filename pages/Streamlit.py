@@ -564,11 +564,11 @@ if sel_report == 'Get Publish Report':
 ########SQL Window
 with st.sidebar:
     global sql_window
-    sql_window = st.checkbox('SQL Window')
+    sql_window = st.checkbox('SQL Window ')
     if sql_window:
-        st.title('SNOWFLAKE CLIENT')
-        sel_role2 = st.selectbox("Role", ['DCM_USER', 'ACCOUNTADMIN', 'ORGADMIN', 'PUBLIC', 'SYSADMIN'])
-        sel_ware2 = st.selectbox("User", ['DNAHCK_W', 'DNAHACK','SNOWFLAKE'])
+        st.title('SNOWFLAKE CLIENT ')
+        sel_role2 = st.selectbox("Role ", ['DCM_USER', 'ACCOUNTADMIN', 'ORGADMIN', 'PUBLIC', 'SYSADMIN'])
+        sel_ware2 = st.selectbox("User ", ['DNAHCK_W', 'DNAHACK','SNOWFLAKE'])
         sql_query1 = st.text_input('Enter SQL')
         if st.button('Enter SQL'):
             pass
