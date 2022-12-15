@@ -17,8 +17,9 @@ st.set_page_config(
 
 image = Image.open('Infosys_logo.JPG')
 image1 = image.resize((100, 60))
-st.image(image1)
+st.image(image)
 st.title("Sign in to Snowflake")
+
 
 
 def switch_page(page_name: str):
@@ -48,12 +49,10 @@ def switch_page(page_name: str):
 def intro():
     
     #st.header("Sign in to Snowflake ❄️", anchor=None)
+    account_name = st.text_input('Account Name',label_visibility="visible")
+    user_name1 = st.text_input('User Name',label_visibility="visible")
 
-    user_name1 = st.text_input('Enter User Name to connect to Snowflake DB',label_visibility="visible")
-
-    account_name = st.text_input('Enter Account Identifier of Snowflake',label_visibility="visible")
-
-    password1 = st.text_input('Enter password to connect to Snowflake DB',label_visibility="visible",type='password')
+    password1 = st.text_input('Password',label_visibility="visible",type='password')
     #agree = st.button('Submit')
     if st.button("submit"):
         if user == user_name1 and password == password1 and account == account_name:
