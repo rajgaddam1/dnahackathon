@@ -567,6 +567,17 @@ if sel_ware == '-------------------' and sel_data == '-------------------' and s
     st.title('SNOWFLAKE CLIENT')
     sel_role1 = st.selectbox("Role", ['DCM_USER', 'ACCOUNTADMIN', 'ORGADMIN', 'PUBLIC', 'SYSADMIN'])
     sel_ware1 = st.selectbox("User", ['DNAHCK_W', 'DNAHACK','SNOWFLAKE'])
-    
+
+with st.sidebar:
+    sql_window = st.checkbox('SQL Window')
+    if sql_window:
+        st.title('SNOWFLAKE CLIENT')
+        sel_role2 = st.selectbox("Role", ['DCM_USER', 'ACCOUNTADMIN', 'ORGADMIN', 'PUBLIC', 'SYSADMIN'])
+        sel_ware2 = st.selectbox("User", ['DNAHCK_W', 'DNAHACK','SNOWFLAKE'])
+        sql_query1 = st.text_input('Enter SQL')
+        if st.button('Enter SQL'):
+            pass
+        
+        
 
     
