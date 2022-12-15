@@ -486,7 +486,16 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
             sel_table = st.radio("Tables Available", tables_df.name)
         else:
             st.write('No tables available')
-        
+#########
+with st.sidebar:
+    sc1 = st.selectbox("Schema",['-------------------'])
+    sc2 = st.selectbox("Table",['-------------------'])
+    sc3 = st.selectbox("View",['-------------------'])
+    sc4 = st.selectbox("Function",['-------------------'])
+    sc5 = st.selectbox("Sequences",['-------------------'])
+    
+   
+     
 #############SIDEBAR_3(Roles)
 with st.sidebar:
     global sel_role
