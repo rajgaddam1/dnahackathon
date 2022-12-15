@@ -17,10 +17,10 @@ st.set_page_config(
 
 image = Image.open('Infosys_logo.JPG')
 image1 = image.resize((100, 60))
-st.image(image1)
+st.image(image1,"<h2 style='text-align: center;>")
 st.title("Sign in to Snowflake")
 
-
+, unsafe_allow_html=True
 
 def switch_page(page_name: str):
     from streamlit.runtime.scriptrunner import RerunData, RerunException
