@@ -562,7 +562,9 @@ if sel_report == 'Get Publish Report':
         st.dataframe(report3_df)    
     
     
-
-
+#######HOME PAGE
+if sel_ware == '-------------------' and sel_data == '-------------------' and sel_role == '-------------------'  and sel_user == '-------------------' and sel_report == '-------------------':
+    st.title('SNOWFLAKE CLIENT')
+    
 
     
