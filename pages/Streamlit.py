@@ -308,13 +308,14 @@ def show_query(_connector) -> pd.DataFrame:
     #str1 = str(dbname)+ "." + str(scname) + "." + str(sel_table3)
     #cmd1 = "select get_ddl('table'," + f" '{str1}' " + ",True) As Query"
     str1 = st.text_input('Enter Table Name')
-    cmd1 = "SELECT * FROM TABLE(DB1.PUBLIC.get_object_ddl1('table'," + f" '{str1}' "  +",true));"
+    if st.button('Show Query'):
+        cmd1 = "SELECT * FROM TABLE(DB1.PUBLIC.get_object_ddl1('table'," + f" '{str1}' "  +",true));"
     #st.write(cmd1)
     #cmd1 =  "select * from get_ddl('table'," + f" '{str1}' " + ",True) As Query"
     #cmd1 = "select * from get_ddl('table'," + f" '{str1}' " + ",True) As Query"
-    return pd.read_sql(cmd1, _connector)
+        return pd.read_sql(cmd1, _connector)
 
-query_df = show_query(snowflake_connector)
+
 ########Publish Report 1
 def get_report1(_connector) -> pd.DataFrame:
     return pd.read_sql("SELECT * FROM TABLE(DB1.PUBLIC.GET_PUBLISH_REPORT(-1));", _connector)
@@ -420,7 +421,7 @@ if sel_data == 'Create a Database':
     st.subheader("👇 Click here to Copy Query from existing table")
     agree3 = st.checkbox('Copy query from existing Table')
     if agree3:
-        #query_df = show_query(snowflake_connector)
+        query_df = show_query(snowflake_connector)
         st.dataframe(query_df)
 
 
