@@ -453,13 +453,11 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
             ###############Copy Query
             agree3 = st.checkbox('Copy query from existing Table')
             if agree3:
-                st.success('Success')
                 
-                
-                #tables_df_query = get_table(snowflake_connector, sel_data, sel_schema)
-                #show_query(con,sel_data,sel_schema,tables_df_query)
-                #query_df = show_query(snowflake_connector,sel_data,sel_schema, tables_df_query)
-                #st.dataframe(query_df)
+                tables_df_query = get_table(snowflake_connector, sel_data, sel_schema)
+                show_query(con,sel_data,sel_schema,tables_df_query)
+                query_df = show_query(snowflake_connector,sel_data,sel_schema, tables_df_query)
+                st.dataframe(query_df)
             
             create_table(con)
     else:
@@ -470,7 +468,7 @@ if sel_data != 'Create a Database' and sel_data !=  '-------------------':
     if sel_schema != 'Select below available Schemas':
         tables_df = get_table(snowflake_connector, sel_data, sel_schema)
         if len(tables_df) != 0:
-            sel_table = st.radio("Tables Available", tables_df.name)
+            sel_table = st.radio("Tables Available", tables_df.name,key = 2)
         else:
             st.write('No tables available')
         
